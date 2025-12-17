@@ -1,0 +1,163 @@
+/* ==================================================
+   IMPORT ACTIVE OMARCHY THEME
+   ================================================== */
+@import "../omarchy/current/theme/waybar.css";
+
+/* ==================================================
+   GLOBAL DEFAULTS
+   ================================================== */
+* {
+  background-color: @background;
+  color: @foreground;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+
+  font-family: CaskaydiaMono Nerd Font;
+  font-size: 12px;
+}
+
+/* ==================================================
+   BAR MARGINS
+   ================================================== */
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+/* ==================================================
+   WORKSPACES
+   ================================================== */
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+}
+
+/* Empty workspace dimming */
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+/* ==================================================
+   MODULE SPACING (CONSISTENT LOOK)
+   ================================================== */
+#backlight,
+#custom-weather,
+#memory,
+#mpris,
+#window,
+#tray,
+#cpu,
+#battery,
+#network,
+#bluetooth,
+#pulseaudio,
+#custom-omarchy,
+#custom-screenrecording-indicator,
+#custom-update {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+/* Expand icon spacing */
+#custom-expand-icon {
+  margin-right: 7px;
+}
+
+/* ==================================================
+   TOOLTIPS (TRANSLUCENT + NO BORDER)
+   ================================================== */
+tooltip {
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+/* ==================================================
+   UPDATE INDICATOR
+   ================================================== */
+#custom-update {
+  font-size: 10px;
+}
+
+/* ==================================================
+   SCREEN RECORDING INDICATOR
+   ================================================== */
+#custom-screenrecording-indicator {
+  min-width: 12px;
+  margin-left: 8.75px;
+  font-size: 10px;
+  padding: 0 11px 0 10px;
+}
+
+/* Active recording = muted red tone */
+#custom-screenrecording-indicator.active {
+  color: #a55555;
+}
+
+/* ==================================================
+   MPRIS (MEDIA PLAYER)
+   ================================================== */
+#mpris {
+  margin-right: 10px;
+}
+
+/* ==================================================
+   CLOCK (SPACING FROM WEATHER)
+   ================================================== */
+#clock {
+  margin-right: 10px;
+}
+
+/* ==================================================
+   AUDIO (PULSEAUDIO STATES)
+   ================================================== */
+#pulseaudio {
+  transition: color 0.2s ease;
+}
+
+/* Muted or volume = 0, Waybar adds `.muted` */
+#pulseaudio.muted {
+  color: #f7768e; /* Tokyo Night red */
+}
+
+/* ==================================================
+   BATTERY STATES
+   ================================================== */
+#battery {
+  transition: color 0.2s ease;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #9ece6a; /* Soft green */
+}
+
+#battery.warning {
+  color: #e0af68; /* Warm amber */
+}
+
+#battery.critical {
+  color: #f7768e; /* Red */
+}
+
+/* ==================================================
+   BACKLIGHT (BRIGHTNESS ICON + COLOR GRADIENT)
+   ================================================== */
+#backlight {
+  transition: color 0.3s ease;
+  color: #d3c948; /* Default yellow */
+}
+
+/* ==================================================
+   HIDDEN MODULES
+   ================================================== */
+.hidden {
+  opacity: 0;
+}
