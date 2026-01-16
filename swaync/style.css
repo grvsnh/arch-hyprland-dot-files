@@ -1,0 +1,112 @@
+:root {
+	--bg: rgba(18, 18, 18, 0.75);
+	--card: rgba(28, 28, 28, 0.78);
+	--hover: rgba(40, 40, 40, 0.85);
+	--border: rgba(255, 255, 255, 0.12);
+	--text: rgba(255, 255, 255, 0.95);
+	--subtext: rgba(200, 200, 210, 0.75);
+	--accent: rgba(120, 180, 255, 0.45);
+	--radius: 12px;
+}
+
+.notification-window,
+.blank-window {
+	background: transparent;
+}
+
+.control-center {
+	background: var(--bg);
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+	padding: 6px;
+}
+
+.widget-dnd {
+	background: var(--card);
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+	padding: 10px;
+	margin: 6px;
+}
+
+.widget-dnd label {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--text);
+}
+
+.widget-dnd switch {
+	margin-left: 10px;
+}
+
+.widget-dnd switch:checked {
+	background: rgba(200, 80, 80, 0.35);
+	border-color: rgba(220, 100, 100, 0.4);
+}
+
+.widget-notifications {
+	margin: 4px;
+	padding-bottom: 8px;
+}
+
+.notification {
+	background: var(--card);
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+	margin: 6px 2px;
+	padding: 8px;
+}
+
+.notification:hover {
+	background: var(--hover);
+}
+
+.notification-row:first-child .notification {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 1px rgba(120, 180, 255, 0.25);
+}
+
+.notification image {
+	min-width: 40px;
+	min-height: 40px;
+	border-radius: 8px;
+	margin-right: 10px;
+}
+
+.notification .summary {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--text);
+}
+
+.notification .body {
+	font-size: 13px;
+	color: var(--subtext);
+	margin-top: 2px;
+}
+
+.notification .time {
+	font-size: 11px;
+	color: var(--subtext);
+	opacity: 0.7;
+}
+
+.notification:hover .time {
+	opacity: 1;
+}
+
+.floating-notifications .notification {
+	background: rgba(22, 22, 22, 0.75);
+	border-width: 0;
+	opacity: 0.92;
+}
+
+.control-center-list-placeholder,
+.control-center-list-placeholder image,
+.control-center-list-placeholder label {
+	opacity: 0;
+	min-height: 0;
+	min-width: 0;
+	padding: 0;
+	margin: 0;
+}

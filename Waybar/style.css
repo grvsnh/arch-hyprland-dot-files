@@ -4,7 +4,8 @@
    ============================================================================ */
 
 /* ---------------------------------------------------------------------------
-   GLOBAL
+   GLOBAL DEFAULTS
+   Applies to all modules
 --------------------------------------------------------------------------- */
 
 * {
@@ -15,11 +16,12 @@
 	min-height: 0;
 }
 
+/* Main Waybar background */
 window#waybar {
 	background-color: rgba(0, 0, 0, 0.78);
 }
 
-/* Consistent module padding */
+/* Consistent padding for left / center / right sections */
 .modules-left,
 .modules-center,
 .modules-right {
@@ -28,6 +30,7 @@ window#waybar {
 
 /* ============================================================================
    WORKSPACES
+   Visual hierarchy: empty → occupied → active
    ============================================================================ */
 
 #workspaces {
@@ -36,40 +39,67 @@ window#waybar {
 	background: transparent;
 }
 
-/* EMPTY — visible but de-emphasized */
+/* ------------------------------------------------------------
+   EMPTY WORKSPACES
+   Light outlined pill — looks intentional, not disabled
+------------------------------------------------------------ */
 #workspaces button.empty {
 	padding: 0 8px;
-	margin: 1px 3px;
-	background-color: rgba(255, 255, 255, 0.03);
-	color: rgba(255, 255, 255, 0.3);
-	border-radius: 6px;
+	margin: 1px 4px;
+
+	/* Outline instead of filled block */
+	background-color: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+
+	/* De-emphasized text */
+	color: rgba(255, 255, 255, 0.35);
+
+	/* Slightly rounder for a soft placeholder feel */
+	border-radius: 7px;
 }
 
-/* OCCUPIED — inactive but meaningful */
+/* Hover on empty workspace — subtle life */
+#workspaces button.empty:hover {
+	background-color: rgba(255, 255, 255, 0.18);
+	color: #000;
+}
+
+/* ------------------------------------------------------------
+   OCCUPIED (inactive) WORKSPACES
+   Solid but calm
+------------------------------------------------------------ */
 #workspaces button {
 	padding: 0 9px;
-	margin: 1px 3px;
-	background-color: rgba(255, 255, 255, 0.12);
-	color: rgba(255, 255, 255, 0.75);
-	border-radius: 6px;
+	margin: 1px 4px;
+
+	background-color: rgba(255, 255, 255, 0.14);
+	color: rgba(255, 255, 255, 0.8);
+
+	border-radius: 7px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.22);
 }
 
-/* ACTIVE — strongest contrast */
+/* ------------------------------------------------------------
+   ACTIVE WORKSPACE
+   Strongest contrast, clear focus
+------------------------------------------------------------ */
 #workspaces button.active {
 	background-color: rgba(255, 255, 255, 0.95);
 	color: #000;
 	border-bottom: 2px solid #fff;
 }
 
-/* HOVER — subtle, never overrides intent */
-#workspaces button:hover {
+/* ------------------------------------------------------------
+   HOVER (non-empty)
+------------------------------------------------------------ */
+#workspaces button:not(.empty):hover {
 	background-color: rgba(255, 255, 255, 0.45);
 	color: #000;
 }
 
 /* ============================================================================
    MODULE BLOCKS
+   Shared styling for all modules
    ============================================================================ */
 
 #custom-omarchy,
@@ -95,7 +125,7 @@ window#waybar {
 	color: rgba(255, 255, 255, 0.88);
 }
 
-/* Unified hover behavior */
+/* Unified hover behavior across modules */
 #custom-omarchy:hover,
 #hyprland-window:hover,
 #clock:hover,
@@ -121,10 +151,12 @@ window#waybar {
    AUDIO STATES
    ============================================================================ */
 
+/* Muted output — visibly quieter */
 #pulseaudio.muted {
 	opacity: 0.35;
 }
 
+/* Microphone input */
 #pulseaudio.source {
 	opacity: 0.85;
 }
@@ -133,6 +165,7 @@ window#waybar {
    IDLE INHIBITOR
    ============================================================================ */
 
+/* Pulsing eye animation when active */
 #idle_inhibitor.activated {
 	animation: eye-pulse 1.5s infinite ease-in-out;
 }
@@ -153,6 +186,7 @@ window#waybar {
    SCREEN RECORDING
    ============================================================================ */
 
+/* Blinking indicator when recording */
 #custom-screenrecording-indicator.active {
 	color: rgba(255, 255, 255, 0.95);
 	animation: rec-blink 0.6s linear infinite alternate;
@@ -173,14 +207,14 @@ window#waybar {
 	color: rgba(255, 255, 255, 0.95);
 }
 
-/* DND / inhibited states */
+/* DND / inhibited notification states */
 #custom-notification.dnd,
 #custom-notification.inhibited {
 	opacity: 0.45;
 }
 
 /* ============================================================================
-   NETWORK & BLUETOOTH STATES
+   NETWORK & BLUETOOTH
    ============================================================================ */
 
 #network.disconnected {
@@ -192,7 +226,7 @@ window#waybar {
 }
 
 /* ============================================================================
-   BATTERY STATES
+   BATTERY
    ============================================================================ */
 
 #battery.charging {
@@ -215,7 +249,7 @@ window#waybar {
 }
 
 /* ============================================================================
-   CALENDAR & TOOLTIP
+   TOOLTIP & CALENDAR
    ============================================================================ */
 
 tooltip {
@@ -254,6 +288,12 @@ tooltip calendar.button:hover {
 	border-radius: 6px;
 }
 
+/* ============================================================================
+   NOTIFICATION ICON (WAYBAR)
+   ============================================================================ */
+
 #custom-notification {
+	font-size: 13px;
+	padding: 0 6px;
 	font-family: "NotoSansMono Nerd Font";
 }
