@@ -1,0 +1,251 @@
+{
+    // ====================================================================
+    // WAYBAR MAIN CONFIG
+    // ====================================================================
+
+    // --------------------------------------------------------------------
+    // BAR BEHAVIOR & GEOMETRY
+    // --------------------------------------------------------------------
+    "exclusive": true,
+    "reload_style_on_change": true,
+    "position": "top",
+
+    // matches CSS (~28px clean fit)
+    "height": 28,
+
+    // tighter spacing between modules
+    "spacing": 4,
+
+    // --------------------------------------------------------------------
+    // MODULE LAYOUT
+    // --------------------------------------------------------------------
+    "modules-left": [
+        "custom/omarchy",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+
+    "modules-center": [
+        "idle_inhibitor",
+        "clock",
+        "custom/weather",
+        "custom/update",
+        "custom/screenrecording-indicator"
+    ],
+
+    "modules-right": [
+        "mpris",
+        "tray",
+        "backlight",
+        "pulseaudio#output",
+        "pulseaudio#input",
+        "network",
+        "bluetooth",
+        "cpu",
+        "battery",
+        "custom/notification"
+    ],
+
+    // ====================================================================
+    // LEFT SIDE MODULES
+    // ====================================================================
+
+    "custom/omarchy": {
+        "format": "<span font='omarchy'>\ue900</span>",
+        "on-click": "omarchy-menu",
+        "tooltip-format": "Omarchy Menu\nSuper + Alt + Space"
+    },
+
+    "hyprland/workspaces": {
+        "persistent-workspaces": { "*": [1, 2, 3, 4, 5] },
+        "on-click": "activate",
+
+        // compact
+        "format": "{icon}{windows}",
+        "format-window-separator": " ",
+
+        "window-rewrite-default": "󰋜",
+        "window-rewrite": {
+            "class<firefox|librewolf|floorp|brave|chromium|chrome|edge>": "󰖟",
+            "class<kitty|konsole|wezterm|ghostty|org.omarchy.terminal>": "",
+            "class<VSCode|code-oss|codium|VSCodium |code>": "",
+            "class<org.gnome.Nautilus|thunar|nemo>": "󰣆",
+            "class<mpv|vlc>": "󰕼",
+            "title<.*YouTube Music.*>": "󰎄",
+            "title<.*YouTube.*>": "",
+            "title<.*Discord.*>": "",
+            "title<.*KDE Connect.*>": "",
+            "title<.*WhatsApp.*>": ""
+        },
+
+        // scroll workspaces (feels nice)
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1"
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 40   // tighter to prevent overflow
+    },
+
+    // ====================================================================
+    // CENTER MODULES
+    // ====================================================================
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰈈",
+            "deactivated": "󰈉"
+        },
+        "tooltip-format": "Idle Inhibitor\nPrevents sleep"
+    },
+
+"clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%a %d %b  %I:%M %p}",
+
+    "tooltip-format": "{calendar}",
+    "calendar": {
+        "mode": "month",
+        "mode-mon-col": 3,
+
+        "format": {
+            // today
+            "today": "<span background='#ffffff30' foreground='#000000'><b>  {}  </b></span>",
+
+            // weekday
+            "weekday": "<span foreground='#ffffff'>{}</span>",
+
+            // other-month
+            "other-month": "<span foreground='#666666'>{}</span>",
+
+            // weekend
+            "weekend": "<span foreground='#bbbbbb'><b>{}</b></span>"
+        }
+    }
+},
+
+    "custom/weather": {
+        "format": "{}",
+        "interval": 600,
+        "exec": "$HOME/.config/scripts/waybar-weather.sh",
+        "return-type": "json",
+        "on-click": "hyprctl dispatch exec \"[float; center; size 900 600] kitty -o window_padding_width=0 -e weathr\"",
+        "tooltip": true
+    },
+
+    "custom/update": {
+        "format": "󰚰",
+        "exec": "omarchy-update-available",
+        "interval": 21600,
+        "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update"
+    },
+
+    "custom/screenrecording-indicator": {
+        "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
+        "return-type": "json",
+        "signal": 8,
+        "on-click": "omarchy-cmd-screenrecord"
+    },
+
+    // ====================================================================
+    // RIGHT SIDE MODULES
+    // ====================================================================
+
+    "mpris": {
+        "format": "󰎈 {artist} - {title}",
+        "format-paused": "󰏤 <i>{title}</i>",
+        "max-length": 30   // tighter
+    },
+
+    "tray": {
+        "icon-size": 10,
+        "spacing": 4,
+        "show-passive-items": true
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "tooltip-format": "Brightness {percent}%",
+        "format-icons": ["󰃚", "󰃜", "󰃛", "󰃝", "󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+    "pulseaudio#output": {
+        "format": "{icon}",
+        "format-muted": "󰖁",
+        "format-icons": {
+            "default": ["󰖁", "󰖀", "󰕾"]
+        },
+        "tooltip-format": "Playing at {volume}%",
+        "on-click": "omarchy-launch-or-focus-tui wiremix",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5"
+    },
+
+    "pulseaudio#input": {
+        "format": "",
+        "tooltip-format": "Listening at {source_volume}%",
+        "on-click": "omarchy-launch-or-focus-tui wiremix"
+    },
+
+    "network": {
+        "format-wifi": "󰤨 ",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤮",
+
+        "tooltip-format-wifi": "{essid}\n⇣ {bandwidthDownBytes} ⇡ {bandwidthUpBytes}",
+        "on-click": "omarchy-launch-wifi"
+    },
+
+    "bluetooth": {
+        "format": "",
+        "tooltip-format": "{num_connections} devices",
+        "on-click": "omarchy-launch-bluetooth"
+    },
+
+    "cpu": {
+        "format": "󰍛 {usage}%",
+        "interval": 2,
+        "tooltip-format": "CPU {usage}%",
+        "on-click": "omarchy-launch-floating-terminal-with-presentation btop"
+    },
+
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "tooltip-format-discharging": "{timeTo}\n{power} W",
+        "tooltip-format-charging": "{timeTo}\n{power} W",
+        "format-icons": {
+            "default": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+            "charging": ["󰢜","󰂆","󰂇","󰂈","󰂉","󰂊","󰂋","󰂅"]
+        }
+    },
+
+    "custom/notification": {
+        "tooltip": true,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂜",
+            "dnd-notification": "󰂠",
+            "dnd-none": "󰪓",
+            "inhibited-notification": "󰂛",
+            "inhibited-none": "󰪑",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}

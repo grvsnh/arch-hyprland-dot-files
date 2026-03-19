@@ -1,0 +1,294 @@
+/* ============================================================================
+   WAYBAR STYLE
+   ============================================================================ */
+
+/* ---------------------------------------------------------------------------
+   GLOBAL DEFAULTS
+--------------------------------------------------------------------------- */
+
+* {
+	font-family: 'JetBrainsMono Nerd Font';
+	font-size: 10px;
+	font-weight: bold;
+	border: none;
+	min-height: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   MAIN BAR
+--------------------------------------------------------------------------- */
+
+window#waybar {
+	background-color: rgba(0, 0, 0, 0.45);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================================
+   GROUP CONTAINERS (tighter capsules)
+=========================================================================== */
+
+.modules-left,
+.modules-center,
+.modules-right {
+	padding: 1px 5px;   /* tighter */
+	margin: 2px 6px;
+
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* tighter right side */
+.modules-right > * {
+	margin: 0 1px;
+	padding: 0 3px;
+}
+
+/* ============================================================================
+   WORKSPACES (compact)
+=========================================================================== */
+
+#workspaces {
+	margin: 1px 6px;
+	background: transparent;
+}
+
+#workspaces button {
+	padding: 0 6px;   /* reduced */
+	margin: 1px 3px;
+
+	background-color: rgba(255, 255, 255, 0.12);
+	color: rgba(255, 255, 255, 0.75);
+
+	border-radius: 7px;
+	transition: all 0.2s ease;
+}
+
+/* empty */
+#workspaces button.empty {
+	background-color: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	color: rgba(255, 255, 255, 0.35);
+}
+
+/* hover */
+#workspaces button:hover {
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #000;
+
+	margin-top: -1px;
+	margin-bottom: 1px;
+}
+
+/* ACTIVE */
+#workspaces button.active {
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.9),
+		rgba(255, 255, 255, 0.7)
+	);
+
+	color: #000;
+
+	padding: 0 8px;   /* slightly bigger than others */
+
+	box-shadow: 0 2px 10px rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================================================
+   MODULE BASE (tightened)
+=========================================================================== */
+
+#custom-omarchy,
+#hyprland-window,
+#clock,
+#idle_inhibitor,
+#custom-weather,
+#custom-update,
+#custom-screenrecording-indicator,
+#custom-notification,
+#mpris,
+#tray,
+#backlight,
+#pulseaudio,
+#network,
+#bluetooth,
+#cpu,
+#battery {
+	margin: 1px 1px;      /* tighter */
+	padding: 0 4px;      /* tighter */
+	border-radius: 8px;
+	color: rgba(255, 255, 255, 0.9);
+
+	transition: all 0.2s ease;
+}
+
+/* ============================================================================
+   HOVER
+=========================================================================== */
+
+#custom-omarchy:hover,
+#hyprland-window:hover,
+#clock:hover,
+#idle_inhibitor:hover,
+#custom-weather:hover,
+#custom-update:hover,
+#custom-screenrecording-indicator:hover,
+#custom-notification:hover,
+#mpris:hover,
+#tray:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#cpu:hover,
+#battery:hover {
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.95),
+		rgba(255, 255, 255, 0.7)
+	);
+
+	color: #000;
+
+	margin-top: -1px;
+	margin-bottom: 1px;
+
+	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.18);
+}
+
+/* ============================================================================
+   SPECIAL MODULE POLISH
+=========================================================================== */
+
+#custom-weather {
+	background: rgba(255, 255, 255, 0.06);
+}
+
+#mpris {
+	opacity: 0.85;
+}
+
+#mpris:hover {
+	opacity: 1;
+}
+
+/* ============================================================================
+   AUDIO STATES
+=========================================================================== */
+
+#pulseaudio.muted {
+	opacity: 0.35;
+}
+
+#pulseaudio.source {
+	opacity: 0.85;
+}
+
+/* ============================================================================
+   IDLE INHIBITOR
+=========================================================================== */
+
+#idle_inhibitor.activated {
+	animation: eye-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes eye-pulse {
+	0% { opacity: 0.4; }
+	50% { opacity: 1; }
+	100% { opacity: 0.4; }
+}
+
+/* ============================================================================
+   SCREEN RECORDING
+=========================================================================== */
+
+#custom-screenrecording-indicator.active {
+	animation: rec-blink 0.6s linear infinite alternate;
+}
+
+@keyframes rec-blink {
+	to { opacity: 0.25; }
+}
+
+/* ============================================================================
+   BATTERY
+=========================================================================== */
+
+#battery.warning {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+#battery.critical:not(.charging) {
+	animation: batt-blink 0.5s steps(12) infinite alternate;
+}
+
+@keyframes batt-blink {
+	to { opacity: 0.3; }
+}
+
+/* ============================================================================
+   NETWORK / BT
+=========================================================================== */
+
+#network.disconnected,
+#bluetooth.disabled {
+	opacity: 0.35;
+}
+
+/* ============================================================================
+   TOOLTIP
+=========================================================================== */
+
+tooltip {
+	background: rgba(10, 10, 10, 0.75);
+	color: rgba(255, 255, 255, 0.9);
+	border-radius: 10px;
+	padding: 6px 8px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+tooltip label {
+	font-size: 11px;
+  letter-spacing: 0.5px;
+	font-weight: normal;
+}
+
+/* ============================================================================
+   CALENDAR
+=========================================================================== */
+
+tooltip calendar {
+	padding: 6px;
+	border-radius: 8px;
+}
+
+tooltip calendar.header {
+	font-weight: bold;
+	font-size: 11px;
+	color: rgba(255, 255, 255, 0.95);
+}
+
+tooltip calendar.button {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+tooltip calendar.button:hover {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 6px;
+}
+
+tooltip calendar:selected {
+	background: rgba(255, 255, 255, 0.9);
+	color: #000;
+	border-radius: 6px;
+}
+
+/* ============================================================================
+   NOTIFICATION ICON
+=========================================================================== */
+
+#custom-notification {
+	font-size: 12px;
+	padding: 0 5px;
+}
