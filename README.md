@@ -1,5 +1,13 @@
 # Arch Hyprland Dotfiles 🚀
 
+![Arch](https://img.shields.io/badge/Arch-Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)
+![Hyprland](https://img.shields.io/badge/Hyprland-Setup-blue?style=for-the-badge)
+![Waybar](https://img.shields.io/badge/Waybar-Customized-purple?style=for-the-badge)
+![SwayNC](https://img.shields.io/badge/SwayNC-Notifications-green?style=for-the-badge)
+![Scripts](https://img.shields.io/badge/Scripts-Modular-orange?style=for-the-badge)
+
+![Waybar](assets/waybar-full.png)
+
 Minimal, modular, and dynamic Hyprland setup with custom scripts for weather, nightlight, and lockscreen.
 
 ---
@@ -14,6 +22,18 @@ This is my personal **Hyprland + Waybar + SwayNC setup** with:
 - 🔋 Lockscreen info (weather + battery)
 - 🔔 Notification system (SwayNC)
 - 🧩 Modular configs (clean separation)
+
+---
+
+## 📸 Preview
+
+| Clock                 | Calendar                 |
+| --------------------- | ------------------------ |
+| ![](assets/clock.png) | ![](assets/calendar.png) |
+
+| Weather                 | Tooltip                         |
+| ----------------------- | ------------------------------- |
+| ![](assets/weather.png) | ![](assets/weather-tooltip.png) |
 
 ---
 
@@ -69,6 +89,12 @@ Make sure you have:
 - `curl`
 - `brightnessctl`
 - `pamixer`
+
+### For weather terminal UI
+
+```bash
+yay -S weathr-bin
+```
 
 ---
 
